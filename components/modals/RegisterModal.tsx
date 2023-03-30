@@ -1,3 +1,4 @@
+import axios from 'axios';
 import useLoginModal from '@/hooks/useLoginModal';
 import React, { useCallback,useState } from 'react'
 import Input from '../Input';
@@ -27,14 +28,20 @@ const RegisterModal = () => {
         try{
             setIsLoading(true);
 
-            //TODO ADD REGISTER AND LOG IN
+            await axios.post('/api/register',{
+                email,
+                password,
+                username,
+                name
+            })
+
             registerModal.onClose();
         }catch(error){
             console.log(error);
         }finally{
             setIsLoading(false);
         }
-      },[registerModal]
+      },[registerModal, email, password,username,name]
       )
 
     const bodyContent = (
